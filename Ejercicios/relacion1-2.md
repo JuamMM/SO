@@ -191,7 +191,7 @@ Tiempo de espera medio: 2.6s
 |E| | | | | | | | | | | | | | |X|X|X| | | | | | |X| | |
 |Cola1|A|B| |C|C| | | | |D|D| |E|E| | | | | | | | | | |
 |Cola2| |A|A|A| |C| | | | | |D|D| |E|E|E| | | | | | | |
-|Cola3| | | | | | |C|C|C|C|C|C|C|CD|CD|CD|CDE|CDE|CDE|CDE|DEC|DEC|EC|C |
+|Cola3| | | | | | |C|C|C|C|C|C|C|CD|CD|CD|CD|CDE|CDE|CDE|CDE|DEC|DEC|EC|C |
 
 14. **Suponga que debe maximizar la eficiencia de un sistema multiusuario y que está recibiendo quejas de muchos usuarios sobre los pobres tiempos de respuesta (o tiempos de vuelta) de sus procesos. Los resultados obtenidos con una herramienta de monitorización del sistema nos muestran que la CPU se utiliza al 99'9% de su tiempo y que los procesadores de E/S están activos solo un 10% de su tiempo. ¿Cuales pueden ser las razones de estos tiempos de respuesta pobres y por qué?**
 
