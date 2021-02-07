@@ -1,0 +1,276 @@
+\section*{Gestion de Memoria Principal}
+
+Los dos principios más importantes sobre la memoria son:
+
+\begin{itemize}
+	\item Menor cantidad acceso más rápido.
+	\item Mayor cantidad mayor coste (monetario) por byte.
+\end{itemize}
+
+Luego nos interesa que los datos a los que accedemos de forma regular se almacenen en una memoria pequeña, rápida y cara mientras que el resto se guardan en una memoria lenta.
+
+
+\subsection*{Cachés}
+Una caché es área de almacenamiento dedicada a la recuperación a gran velocidad de los datos que empleamos con mayor frecuencia. Denominaremos un \textbf{acierto en la caché} cuando al buscar en este área de almacenamiento un dato en concreto lo encontramos, en caso contrario se denominará \textbf{fallo en la caché}.
+
+Cuando trabajamos con cachés se mencionará también el \textbf{tiempo de acceso efectivo(TAE)} esto hace referencia al tiempo promedio que se estima que se tardará en encontrar un dato en memoria. Nos viene dado por la siguiente fórmula:
+
+\[
+TAE = Probabilidad_acierdo\times coste_acierto + Probabilidad_fallo\times coste fallo.
+\]
+
+Esto funciona puesto que los programas no son completamente aleatorios, si no que hacen uso del \textbf{principio de localidad} el cuál nos dice basándonos en el pasado reciente de un programa es posible predecir que instrucciones y datos serán empleados en el futuro. Existen 3 casos importantes de localidad:
+
+\begin{itemize}
+	\item \textbf{Localidad Temporal}: Si en un momento una posición de memoria es referenciada, entonces es muy probable que la misma ubicación vuelva a ser referenciada en un futuro cercano. Es común almacenar una copia de los datos en caché para acceder a ellos de forma más rápida.
+	\item \textbf{Localidad Espacial}: Si una localización de memoria es refencidada en un momento concreto es posible que posiciones adyacentes también sean referencias en poco tiempo.
+	\item \textbf{Localidad Secuencial} Las direcciones de memoria empleadas suelen ser contiguas, ya que las órdenes suelen ejecutarse una destrás de otra.
+\end{itemize}
+
+\subsection*{Espacio de direcciones lógico y físico}
+
+Denominamos espacio de direcciones lógico al conjunto de direcciones lógicas de un programa. Una dirección lógica  está generada por la CPU mientras se ejecuta un programa. Se trata de una dirección virtual que no existe físicamente. La unidad de gestión de memoria se encarga de asignar a cada dirección lógica su dirección física.
+
+Un espacio de dirección físicas es idéntico pero con direcciones físicas. La dirección física hace refencia a una ubicación en la unidad de memoria.
+
+\section*{Memoria virtual y swapping}
+En ocasiones el tamaño de un programa puede exceder la cantidad de memoria física que disponemos para él. Una solución a este problema consiste en guardar la mayor parte de la información de un programa en disco, moviendo aquellas partes que sean necesarias a memoria principal.
+
+Cuando cada programa se encarga de decidir que información se guarda en cada sitio y decidir cuando se trae y lleva se denomina segmentación. Esto dificulta el diseño y provoca que los programas se creen conflictos entre sí.
+
+La alternativa consiste en usar memoria virtual. El hardware y el sistema operativo hacen uso de la memoria principal y secundaria para crear un conjunto de direcciones lógicas que pueden ser traducidas obtener la dirección real, de esta forma simulamos una cantidad de memoria mucho mayor.
+
+El procedimiento es el siguiente: la \textbf{Unidad de Manjeo de Memoria} o MMU se encarga de traducir las direcciones virtuales, si la dirección real de de memoria se encuentra en la memoria principal se coninua como si la memoria virutal no estuviese presente. En caso de que no se encuentre en memoria principal, se invoca al sistema operativo para resolver la excepción de la siguiente forma:
+
+\begin{enumerate}
+	\item bloqueamos el proceso.
+	\item Encontrar la ubicación den disco de la página solicitada.
+	\item Encontrar un marco libre o desplazar alguno de memoria principal.
+	\item Cargar la página desde disco a memoria principal.
+	\item actualizar las tablas.
+	\item desbloquear el proceso y reiniciar la instrucción que causó la falta de página
+\end{enumerate}
+
+Un swap o \textbf{espacio de intercambio} es una área del disco duro que se emplea para itnercambiar la memoria física con la memoria virtual. De forma que swapping consiste en intercambiar los procesos que se encuentran en memoria principal a un almacenamiento auxiliar.
+
+Nuestro intercambiador se encarga de seleccionar que procesos se retiran de memoria principal y cuáles son devueltos a ella. Ademaś de gestionar y asignar el espacio de intercambio.
+
+\subsection*{Estrategias de asignación de memoria}
+
+Las organizaciones de memoria pueden ser clasificadas en 2 estrategias distintas:
+
+\begin{itemize}
+	\item \textbf{Contiguas} La asignacion del almacenamiento para un programa se hace en un único bloque de posiciones continuas en memoria principal. Se puede dividir en particiones de tamaño fijo o variable.
+	\item \textbf{No contiguas} No es necesario que los distintos bloques del programa se almacenen en posiciones contiguas en memoria. En este caso estaríamos hablando de paginación y segmentación.
+\end{itemize}
+
+\section*{Paginación}
+Divivimos la memoria física en un bloques de tamaño fijo, a los que denominaremos marcos de página el tamaño de estos marcos siempre será potencia de 2.
+
+El espacio lógico de un proceso también es dividido en bloques del mismo tamaño a los que denominamos páginas. Estos serán contenidos por los marcos de página de cada proceso.
+
+\begin{itemize}
+	\item \textbf{direcciones lógicas} Se dividen en número de página (p) y el desplazamiento dentro de la página (d).
+	\item \textbf{direcciones físicas} Se dividen en el número del marco (m) que consiste en la dirección base del marco donde se almacena la página y el desplazamiento (d).
+\end{itemize}
+
+Nuestra tabla de páginas tendrá la siguiente forma:
+
+\begin{tabular}{| c | c | c | c | c |}
+	\hline
+	Nº página & Nº marco & presencia & modificacion & protección \\
+	\hline
+\end{tabular}
+
+\begin{itemize}
+	\item El bit de presencia nos indica si se encuentra en memoria principal.
+	\item El bit de modificación nos indica si la página ha sido cambiada. Cuando seleccionamos una página para su reemplazo comprobamos su bit de modificación, si está activo sabemos que ha de ser escrita en disco.
+	\item bits de protección, el modo de acceso autorizado a la página
+\end{itemize}
+
+\subsection*{Tabla de Páginas}
+La tabla de páginas se mantiene en todo momento en memoria principal. El registro base de la tabla de páginas apunta a la tabla de páginas, Suele almacenarse en el \textbf{PCB} del proceso.
+
+El PCB, BCP o \textbf{bloque de control del proceso} es un registro especial el sistema operativo almacena toda la información necesaria para un proceso particular. Cuando un proceso termina su PCB es borrado y el registro puede ser empleado por otros procesos.
+
+Cada acceso a un instrucción o dato requiere de dos accesos a memoria, el primero a la tabla de páginas y otro a la memoria donde se almacena el dato necesario.
+
+El número de páginas de la tabla puede causar que el tamaño de esta sea demasiado grande y ocupe demasiado espacio en memoria principal. La solución para este problema es \textbf{paginación a multinivel}.
+
+\subsection*{Paginación a multinivel}
+Consiste básicamente en paginar la tabla de páginas, de forma que esta no se encuentre cargada completamente en memoria principal y no ocupe direcciones consecutivas. En SO con tablas a multinivel los números de páginas se dividen en dos partes, los bits más significativos indican el directorio de páginas correspondiente y los bits menos significativos el índice del directorio en el que se encuentra la página buscada.
+
+Otra solución al problema del espacio son las páginas compartidas. Se tratan de una copia del código de solo lectura que se encuentra compartido por varios procesos.
+
+\section*{Segmentacion}
+Se trata de un esquema de organización de memoria que divide al programa en una colección de unidades lógicas denominadas segmentos. Estos segmentos pueden ser procedimientos, funciones, tabla de símbolos, etc...
+
+La tabla de segmentos aplica \textbf{direcciones bidimensionales} (número de segmento y el desplazamiento) que han sido definidas por el usuario en direcciones físicas. Cada entrada de la tabla tiene los siguientes elementos:
+
+ \begin{itemize}
+ 		\item\textbf{bit de presencia}
+		\item\textbf{bit de modificación}
+		\item\textbf{bits de protección}
+		\item\textbf{base} Dirección física donde reside el inicio del segmento en memoria.
+		\item\textbf{tamaño} Longitud del segmento.
+ \end{itemize}
+
+Al igual que la tabla de páginas la tabla de segmentos se mantiene en memoria principal. Su \textbf{Registro Base de la Tabla de Segmentos RBTS} apunta a la tabla de segmentos, este registro suele almacenarse en el PCB del proceso. El  registro \textbf{Longitud de la Tabla de Segmentos STLR} nos indica el número de segmentos generados por cada proceso. Un número de segmentos es legas si es emnor que STLR, Este registro también suele almacenarse en el PCB.
+
+\subsection*{Segmentación Paginada}
+La variabilidad del tamaño de los segmentos y el requisisto de memoria contigua dentro de un segmento complican la gestión de memoria principal y memoria secundaria. En el caso de la paginación aunque se simplifica la gestión, la compartición y protección son mas complejos.
+
+Algunos sistemas combinan ambos enfoques obteniendo la amyoría de las ventajas de la segmentación y eliminan los problemas de una gestión de memoria compleja.
+
+\section*{Gestión de Memoria Virtual}
+Sin importar la política de sustitución empleada existen ciertos criterios que siempre han de cumplirse:
+
+\begin{itemize}
+	\item\textbf{Páginas limpias frente a sucias} Una páginas que no ha sio editada se denominará limpia mientras que aquella que ha sido modificada se considera sucia o "dirty". Si necesitamos liberar de memoria principal una página sucia esta ha de ser copiada a disco antes de realizar la operación, aumentando el coste de la transferencia.
+	\item\textbf{Páginas compartidas} Con ellas se reduce el número de faltas de página.
+	\item\textbf{Páginas especiales} Algunos marcos pueden ser bloqueados un ejemplo serían los búferes de E/S mientras se realiza una transferencia.
+\end{itemize}
+
+El tamaño de página influye en el rendimiento de un programa, cuanto más pequeñas sean las páginas mayor tamaño tiene la tabla de páginas, y hay un amyor número de transferencias de memoria principal a disco. Sin embargo si son demasiado grandes, las páginas que no están siendo empleadas ocupan una gran cantidad de memoria principal.
+
+
+\subsection*{Algoritmos de Sustitución}
+\begin{itemize}
+	\item\textbf{Optimo:} Sustituye la página que no se va a referenciar en el futuro o que se referencie más tarde.
+	\item\textbf{FIFO:} Sustituye la página más antigua.
+	\item\textbf{LRU:} Sustituye la página que fue objeto de la referencia más antigua.
+	\item\textbf{Algoritmo del reloj:} Cada página tiene un bit R inicializado a 1 por el hardware. Los marcos de página se representan por una lista circular y un puntero a la página visitada hace más tiempo. Cuando buscamos una página para sustituir se consulta el marco de página actual y se comprueba si R es igual a 0, en caso negativo se iguala a 0 y se pasa al siguiente marco hasta enconrar una página con R=0, que seleccionaremos para sustituir.
+\end{itemize}
+
+Al final si queremos disminuir el número de faltas de página importa más la cantidad de memoria principal disponible que el algoritmo de sustitución.
+
+Denominamos \textbf{conjunto de trabajo} de un proceso al conjunto de páginas que son referenciadas frecuentemente en una intervalo de tiempo. Los conjuntos de trabajo son transitorios, no se puede predecir el tamaño futuro de un un conjunto de trabajo y son substancialmente distintos unos de otros.
+
+Un proceso no puede ejecutarse si su conjunto de trabajo no se encuentra en memoria principal, y una página no puede retirarse de ella si se encuentra en el conjunto de trabajo del proceso en ejecución.
+
+\subsection*{Algoritmo de Sustitución basado en Espacios de Trabajo}
+En cada referencia se determia el conjunto de trabajo (WS), \textbf{SÓLO} las páginas que se encuentren en el intervalo (t-x,t] se mantendrán en memoria principal. Siendo x una variable suministrada por el algoritmo y t el tiempo en el que se realiza la comprobación.
+
+\subsection*{Alfotirmo FFP}
+El algotimo de frecuencia de falta de página nos dice que para ajustar el conjunto de páginas de un proceso se emplea el intervalo de tiempo entre dos faltas de página consecutivas.
+
+\begin{itemize}
+	\item Si el intervalo de tiempo es mayor que una constante por ejemplo Y, todas las páginas no referenciadas en ese intervalo son retiradas de memoria principal.
+	\item En cualquier otro caso la nueva página se incluye en el conjunto de páginas residentes.
+\end{itemize}
+
+\section*{Hiperpaginación}
+Si un proceso no tiene suficientes páginas en memoria principal su tasa de faltas de páginas es muy alta lo que causa el estado de \textbf{hiperpaginación}. En este estado el sistema operativo se encuentra ocupado en resolver las faltas de página y hay un uso muy bajo de la CPU.
+
+Existen varias formas de trata de evitar la hiperpaginación, algunas de ellas consisten en:
+\begin{itemize}
+	\item Asegurar que cada proceso tenga asignado un espacio en relación a su comportamiento (Algoritmos de asignación variables).
+	\item Acutar directamente sobre el grado de multiprogramación (Algoritmos de regulación de carga).
+\end{itemize}
+
+\section*{Gestión de memoria en Linux}
+
+\subsection*{Gestión de memoria a bajo nivel}
+Una página física es la unidad básica de gestión de memoria, tiene la siguiente forma:
+
+\begin{lstlisting}
+struct page{
+	unsigned long flags;
+	atomic_t_count;
+	struct address_space *mapping;
+	void *virtual;
+	...
+}
+\end{lstlisting}
+
+Una página puede ser utilizada por datos privados, el espacio de direcciones del proceso, el código kernel. La propia caché de páginas, en este caso el campo mapping apuntará al objeto representado por address$\_$space. A continuación se presentan algunas funciones para al asignación de memoria a páginas:
+
+\begin{itemize}
+	\item\textbf{struct page *alloc$\_$pages(...,...,unsigned int order):} La función asigna $2^{order}$ páginas físicas contiguas y devuelve un puntero a la struct page de la primera página.
+	\item\textbf{unsigned long get$\_$free$\_$pages(...,...,unsigned int order):} Esta función asigna $2^{order}$ páginas físicas contiguas y devuelve la dirección lógica de la primera página.
+\end{itemize}
+
+Las funcion \textbf{free$\_$pages} realiza el procedimiento contrario liberan $2^{order}$ páginas empezando por la primera página o dirección lógica correspondiente a una página que se le suministre.
+
+\textbf{kmalloc} y \textbf{kfree} son funciones de asignacion y liberación de memoria en bytes, actúan de forma similar a sus contrapartes en C.
+
+Con el tipo de dato \textbf{gfp$\_$t} podemos especificar el tipo de memoria solicitada mediante las siguientes categorías de flags:
+
+\begin{itemize}
+	\item\textbf{Modificadores de acción:} GFP$\_$WAIT, GFP$\_$IO.
+	\item\textbf{Modificadores de zona:} GFP$\_$DMA.
+\end{itemize}
+
+Se puede emplear también \textbf{GFP$\_$KERNEL} y \textbf{GFP$\_$USER} para indicar solicitudes de memoria para el kernel y el espacio de usuario de un proceso respectivamente.
+
+\subsection*{Caché de bloques}
+La asignación y liberación de estructuras de datos se realiza en linux mediante el \textbf{nivel de bloques}. El nivel de bloque divide los diferentos objetos en grupos denominados cachés, cada una de ellas almacena un tipo diferente de objeto, existe un caché por cada tipo de objeto. Estas caché son entonces divididas en bloques. Cada uno de estos bloques está compuesto por uno o más páginas que se encuentren contiguas físicamente. Normalmente cada bloque está compuesta por una única página y una chaché.
+
+Cada bloque contiene un número de objetos, que son las estructuras de datos siendo almacenados. Los bloques pueden encontrarse en 3 estado distintos:
+
+\begin{itemize}
+	\item\textbf{LLeno:} No tiene objetos libres.
+	\item\textbf{Parcial:} Contiene algún objeto vacío.
+	\item\textbf{Vacío:} Todos sus objetos están libres.
+\end{itemize}
+
+Cuando un kernel solicita una nueva estructura, dicha solicitud se trata de satisfacer primero mediante un bloque parcial, si no es posible se emplea uno vacío. En el caso de que no exista un bloque vacío para este tipo de estructura se crea uno nuevo y se satisface con este.
+
+\section*{Espacio de direcciones de un proceso}
+Un espacio de direcciones es el conjunto de direcciones que puede usar un proceso para direccionar memoria. El espacio de direcciones es único para cada proceso, excepto en circumstancias especiales ene las que los procesos desean compartir sus espacios de direcciones.
+
+Un proceso solo tiene permiso para acceder a determinados intervalos de memoria, que denominamos como áreas de memoria. Éstas pueden contener:
+
+\begin{itemize}
+	\item\textbf{text seccion:} Un mapa de memoria de la sección del código.
+	\item\textbf{data section:} Un mapa de memoria de la sección de variables globales inicializadas.
+	\item\textbf{bss section:} Un mapa de memoria con una proyección de la página cero para variables globales no inicializadas.
+	\item Un mapa de memoria con una proyección de la página cero para la pila de espacio de usuario.
+\end{itemize}
+
+Denominamos \textbf{descriptor de memoria} a la estructura de datos que almacena toda la información relacionada con el espacio de direcciones de un proceso. Cada proceso tiene asignado un descriptor de memoria de tipo \textbf{mm$\_$struct}.
+
+\begin{lstlisting}
+struct mm_struct{
+	struct vm_area_struct *mmap;
+	struct rb_root mm_rb;
+	struct list_head mmlist;
+	atomic_t mm_users;
+	atomic_t mm_count;
+}
+\end{lstlisting}
+
+Para asignar un descriptor de memoria se copia el descriptor del descript de memoria original cuando se ejecuta \textbf{fork()}. Se comparte dicho descriptor medianta el flag \textbf{CLONE$\_$VM} de la llamada clone().
+
+Para liberar el descriptor se decrementa el contador de \textbf{mm$\_$users}, cuando el contador llega a 0, se decrementa el contador de uso \textbf{mm$\_$count}. Si este llegase a valer 0, se liberar la mm$\_$struct de la caché.
+
+
+Un área de memoria \textbf{struct vm$\_$area$\_$struct} o VMA describe un intervalo contiguo del espacio de direcciones. En el archivo \textbf{/proc/<pid>/maps} podemos ver las VMAs del proceso con PID suministrado. El formato es el siguiente:
+
+\begin{itemize}
+	\item\textbf{start-end:} Dirección de comienzo y final de la VMA en el espacio de direcciones del proceso.
+	\item\textbf{permission:} Describe los permisos de acceso al conjunto de páginas del VMA.
+	\item\textbf{offset:} Si la VMA proyecta un archivo indica el offset en el archivo, si no, valor 0.
+	\item\textbf{major,minor:} Se corresponden con los números major, minor del dispositivo en donde reside el archivo.
+	\item\textbf{inode:} Almacena el número del inodo del archivo.
+	\item\textbf{file:} Nombre del archivo.
+\end{itemize}
+
+Para crear un VMA se emplea la órden \textbf{fo$\_$mmap()}, que permite expandir un espacio de direcciones ya existente a otro adyacente con los mismos permisos, o crear una nueva VMA que represente el nuevo intervalo de direcciones. Mediante \textbf{do$\_$munnmap(struct mm$\_$struct *mm, unsigned long start, size$\_$t len)} podemos eliminar un intervalo de direcciones.
+
+\begin{itemize}
+	\item\textbf{mm:} Especifica el espacio de direcciones que vamos a eliminar.
+	\item\textbf{start:} El intervalo de memoria en el que comienza el espacio.
+	\item\textbf{len:} Longitud en bytes.
+\end{itemize}
+
+Las direcciones virtuales de un proceso han de convertirse en direcciones físicas medienta tablas de páginas. En linux existen 3 niveles de tablas de páginas:
+
+\begin{itemize}
+	\item\textbf{Directorio global de páginas (PGD):} Se trata de la tabla de páginas de más alto nivel, consta de un array de tipo pgd$\_$t.
+	\item\textbf{PMD:} Las entradas de la PGD apuntan a las entradas de las tablas de páginas de segundo nivel, se trata de un array de tipo pmd$\_$t.
+	\item\textbf{PTE:} Las entradas de la PMD apuntan a su vez a las entradas de la PTE, el último nivel es la tabla de páginas y contine entradas de tabla de páginas de tipo pte$\_$t que apuntan a páginas físicas.
+\end{itemize}
+
+\section*{Caché de páginas}
+Está constituida por páginas físicas de RAM, y los contenidos de éstas se corresponde con bloques físicos de disco. Su tamaño es dínamico y el dispositivo sobre el que se crea la caché se denomina almacén de respaldo \textbf{backing store}. La lectura y escritora de datos se realiza directamente sobre el disco.

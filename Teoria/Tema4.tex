@@ -1,0 +1,181 @@
+\section*{Interfaz de los sistemas de archivos}
+
+Un archivo es una colección de información almacenada en la forma de una secuencia de registros, en un dispositivo de almacenamiento secundario. Los datos almacenados en el archivo tienen sus espacios de direcciones lógicas contiguas. Su estructura interna es una secuencia de bytes determinada por el tipo del archivo. Los registros contienen un conjunto de campos referentes a una entidad y constituyen una unidad para su procesos.
+
+Los archivos pueden ser de distintos tipos:
+
+\begin{itemize}
+	\item archivos regulares.
+	\item directorios.
+	\item archivos de dispositivos.
+\end{itemize}
+
+Denominamos \textbf{metadatos} de un archivo a los atributos del mismo estos son:
+
+\begin{itemize}
+	\item\textbf{Nombre:} Identifica al archivo
+	\item\textbf{Tipo:} Tipo de caracteres que puede contener el archivo.
+	\item\textbf{Localización:}
+	\item\textbf{Tamaño:}
+	\item\textbf{Protección:} Controla quién puede leer o escribir.
+	\item\textbf{Tiempo, fecha e identificación del usuario:}
+\end{itemize}
+
+Las operaciones que podemos realizar sobre un archivo de pueden agrupar por el tipo. Las operaciones pueden ser de \textbf{gestión}(crear, borrar, renombrar, copiar, establecer y obtener atributos) o de \textbf{procesamiento}(Abrir y cerrar, leer, escribir).
+
+\subsection*{Estructura de directorios}
+
+Se trata de una colección de nodos, usualmente con forma de árbol, que contienene toda la información arcerca de los archivos. Tanto la estructura de directorios como los archivos residen en el almacenamiento secundario.
+
+Cada directorio puede tener uno o más subdirectorios, permitiendo la existencia de ficheros con mismo nombre, en algunos sistemas de directorios un mismo archivo puede pertenecer a varios directorios(estructura en grafo). En Linux todos los dispositivos conectados al ordenador se integran en una única jerarquía de directorios.
+
+La organización lógica de los directorios ha de proporcionar \textbf{eficiencia} cada archivo ha de ser localizado en el menor tiempo posible. \textbf{Denominación} un mismo archivo puede tener varios nombres y varios archivos pueden tener el mismo nombre si pertenecen a ususarios distintos. \textbf{Agrupación} los archivos han de agruparse de forma lógica en función de sus propiedades.
+
+Existen difetentes tipos de accesos a los directorios que nos indican que operaciones pueden realizarse (leer, escribir, ejecutar, etc..) sobre un directorio y por quién.
+
+Para asegurar la protección de un archivo, el acceso al mismo depende del \textbf{identificativo del ususario}. Elaborar listas de acceso de ususarios individuales genera el problema de que tienden a ser demasiado largas. Es por esto que se emplean las \textbf{clases de usuario}(propietario, grupo y público). Una opción alternativa consiste en asociar una contraseña al archivo, lo cuál obliga a asociar una contraseña por tipo de acceso y a los usuarios a recordar una o más contraseñas por archivo.
+
+\subsection*{Semánticas de consistencia}
+Indican cuándo las modificaciones sobre los datos de un archivo son observables por el resto de usuarios.
+
+\begin{itemize}
+	\item\textbf{Semántica de Unix:} La escritura sobre un archivo es directamente observable.
+	\item\textbf{Semánticas de sesión:} La escritura no es directamente observable. Cuando cerramos un archivos sus modificaciones sólo pueden verse en sesiones posteriores
+	\item\textbf{Archivos inmutables:} No pueden ser modificados
+\end{itemize}
+
+Un sistema de archivos ha de tener conocimiento de todos los archivos almacenados en el mismo. En cargarse de la \textbf{compartición, y protección} de los mismos. \textbf{Gestionar} el espacio (asignación y liberación de espacio en disco) y \textbf{traducir} las direcciones lógicas a físicas, puesto que los usuarios indican que partes quieren leer/escribir en términos de direcciones lógicas.
+
+\section*{Diseño de software del sistema de archivos}
+
+Un sistema de archivos ha de definir la \textbf{visión del usuario} del sistema de archivos y los \textbf{algoritmos y estructuras de datos} que han de crearse para elaborar la correspondencia lógica-física.
+
+Por motivos de eficiencia el SO mantiene una tabla indexada por descirptor de archivos de aquellos archivos que se encuentren abiertos. Cada archivo poseé un \textbf{bloque de control de archivo}. Una estructura que almacena la información de un archivo en uso. Los archivos se organizan por capas de la siguiente forma:
+
+\begin{centring}
+	\textbf{Programas de aplicación}
+
+	\downarrow
+
+	\textbf{sistema lógico de archivos}(manjea estructuras de directorio y protección)
+
+	\downarrow
+
+	\textbf{módulo de organización de arhivos}(conoce arhivos y bloques lógicos y físicos)
+
+	\downarrow
+
+	\textbf{sistema de archivos básico}(lectura/escritura física)
+
+	\downarrrow
+
+	\textbf{control E/S}(manejadores de dispositivos e interrupción)
+
+	\downarrow
+
+	\textbf{dispositivo}
+\end{centring}
+
+\section*{Métodos de asignación de espacio}
+
+\subsection*{Contiguo}
+Cada archivo ocupa un conjunto de bloques contiguos en disco. Es sencillo y eficiente tanto en acceso secuencial como en directo. Aunque este métoto de asignación de espacio provoca que se derroche espacio (fragmentación externa) las archivos no pueden crecer a no ser que se realize \textbf{compactación}, un procedimiento muy ineficiente. El tamaño que cada bloque es inicialmente desconocido.
+
+La asociación lógica a física viene dada por la fórmula:
+
+\[
+	DL/tam_de_bloque \rightarrow C(ociente), R(esto)
+\]
+
+Dónde el bloque a acceder viene dado por $C$ + la dirección de comienzo y el desplazameinto dentro del bloque por el resto.
+
+\subsection*{Enlazado (No contiguo)}
+Cada archivo es una lista enlazada de bloques de disco. Cada uno de estos bloques pueden encontrarse dispersos por el disco. De esta forma se evita la fragmentación externa y mientras existan bloques libres en disco los archivos puede crecer dinámicamente. El acceso directo a los archivos no es especialmente efectivo puesto que es necesario recorrer todos los anteriores.
+
+La tabla de asignación de archivos \textbf{FAT} reserva una sección del disco al comienzo de la partición de la FAT. Contiene una entrada por cada bloque del disco y está indexada por el número de bloque de disco
+
+\subsection*{Indexado (No Contiguo)}
+Todos los punteros a los bloques están juntos en una localización concreta denominada \textbf{bloque índice}. El directorio tiene la localización de este bloque índice y cada archivo tiene asociado su propio bloque índice.
+
+\section*{Gestión de espacio libre}
+El sistema mantiene una lista de los bloques que están libres: lista de espacio libre. La tabla FAT no necsita ningún método para gestionar el espacio libre.
+
+La lista de espacio libre puede implementarse mediante:
+
+\begin{itemize}
+	\item\textbf{Mapa de Bits:} Cada bloque se representa con un bit (0-libre, 1-ocupado).
+	\item\textbf{Lista enlazada:} Enlaza todos los bloques libres del disco, cada bloque libre apunta al siguiente. Guarda un puntero al primer bloque.
+	\item\textbf{Lista enlazada con agrupacion:} Cada bloque libre almacena n-1 direcciones de bloques libres, la última dirección apunta al siguiente bloque libre.
+\end{itemize}
+
+\section*{Implementación de directotios}
+Una entrada de directorio puede ser implementada de diversas formas:
+
+\begin{itemize}
+	\item Nombre de Archivo + Atributos + Dirección de bloques
+	\item Nombre de Archivo + Puntero a una estructura de datos que contiene todoa la información relatica al archivo.
+\end{itemize}
+
+Cuando abrimos un archivo el SO busca en su directorio la entrada correspondiente, extrae sus atributos y la localización de sus bloques de datos y los coloca en una tabla en memoria principal.
+
+La implementación de archivos compartidos puede realizarse mediante \textbf{enlaces simbólicos} cuando se crea una nueva entrada al directorio se indica que es de tipo enlace y se almacena el camino de acceso absoluto o relativo al archivo a enlazar. Otra opción es usar \textbf{enlaces absolutos} mediante los cuáles se crea una nueva entrada en el directorio y se copia la dirección de la estructura de datos con la información del archivo.
+
+Los sistemas de archivos se almacenan en discos, cada uno de ellos puede particionarse y cada partición puede poseer su propio sistema de archivos.
+
+\section*{Recuperación}
+Como los archivos y directorios se mantienen tanto en memoria principal como en disco, el sistema ha de disponer de algun sistema de \textbf{consitencia}. Se comparan los datos de la estructura de directorios con los bloques de datos en disco y trata cualquier inconsistencia. Otra opción es hacer uso de programas del sistema para realizar \textbf{copias de seguridad} de los datos de disco a otros dispositivos y recuperación de archivos perdidos.
+
+\section*{Gestión de archivos en Linux}
+Cada archivos tiene asociado un único \textbf{i-nodo} se trata de la representación interna de un archivo y cuando referenciamos a un archivo se analizan permisos y se lleva el i-nodo a memoria principal hasta que se cierra el archivo.
+
+El sistema operativo implementa al menos un sistema de archivos \textbf{SA} este puede ser estándar o nativo. En linux existen \textbf{ext2, ext3, ext4}. Para poder dar soporte a otros SA distintos el kernel incluye una capa entre los procesos de usuario y la implementación del SA denominada \textbf{Sistema de archivos Virtual VFS}.
+
+Los sistemas de archivos se pueden dividir en:
+
+\begin{itemize}
+	\item\textbf{SA basados en disco:} Se trata de la firma clásica de almacenar archivos en medios no volátiles.
+	\item\textbf{SA Virtuales:} Son generados por el kernel y constituyen una forma simple para permitir la comunicación entre los programas y los usuarios
+	\item\textbf{SA de Red:} Permiten acceder a los datos mediante la red.
+\end{itemize}
+
+Para un programa usuario un archivos es identificado mediante su \textbf{descriptor de archivo}. Este es empleado como índice en la tabla de descriptores para posteriores operaciones. El descriptor es asignado por el kernel cuando se abre el archivo y es válido sólo dentro de un proceso, esto permite que dos procesos distintos empleen el mismo descriptor pero no se apunta al mismo archivo.
+
+Un i-nodo contiene:
+
+\begin{itemize}
+	\item\textbf{Identificador del propietario}
+	\item\textbf{Tipo de archivo}
+	\item\textbf{Permisos de acceso}
+	\item\textbf{Tiempos de acceso}
+	\item\textbf{Contador de enlaces}
+	\item\textbf{Tabla de contenidos para las direcciones de los datos}
+	\item\textbf{Tamaño}
+\end{itemize}
+
+\section*{Estructura VFS}
+El sistema de archivos virtual está orientado a objetos, consta de dos componentes: archivos y SA, que necesita gestionar y abstraer. Se representa a un archivo y a un SA con una familia de estructuras de datos hechas en C, existen 4 tipos de objetos primarios del VFS:
+
+\begin{itemize}
+	\item\textbf{superblock:} representa a un SA montado.
+	\item\textbf{inode:} representa a un archivo.
+	\item\textbf{dentry:} representa a una entrada de un directorio.
+	\item\textbf{file:} representa a un archivo abierto y es una estructura por proceso.
+\end{itemize}
+
+Cada uno de estos objetos primarios tiene un vector de operations, el cuál describe los métodos que el kernel invoca sobre los objetos primarios. el objeto \textbf{super_operations} son los métodos que el kernel puede invocar sobre un SA concreto. \textbf{inode_operations} aquellos que se pueden invocar sobre un archivo concreto (create(), link()). \textbf{dentry_operations} y \textbf{file_operations} son el métodos que se pueden invocar sobre una entrada del directorio y métodos que un proceso puede invocar sobre un archivo abierto respectivamente.
+
+Cada sistema de archivos está representado por una estructura \textbf{file_system_type}, el que describe el SA y sus capacidades. Los puntos de montaje está representados por \textbf{vfsmount} que mantiene información como sus localizaciones y flags de montaje. Para describir al SA y sus archivos asociados se emplean \textbf{fs_struct} y \textbf{file_struct} las cuáles son únicas para cada proceso.
+
+\section*{Sistema de archivos Ext2}
+
+El disco duro es dividido en un conjunto de bloques de igual tamaño donde se almacenan los datos de los archivos de administración. El elemento central de Ext2 es el grupo de bloques \textbf{block group}. Cada SA consta de un gran número de grupos de bloques secuenciales:
+
+\begin{itemize}
+	\item\textbf{Boot sector o Boo block:} Zona del disco duro cuyo contenido se carga automáticamente por la BIOS y se ejecuta cuando el sistema arranca. Cuando se monta una SA sus datos (\textbf{superbloque}) se almacena en MP.
+	\item\textbf{Superbloque:} Estructura central para almacenar meta-información del SA.
+	\item\textbf{Descriptores del grupo ()Group descriptors:} Contienen información que refleja el estado de los grupos de bloques individuales del SA. Bloques libres, inodos libres, etc...
+	\item\textbf{Mapa de bits de bloques de datos y de inodos:} Cotienen un bit por bloque de datos y por inodo respectivamente para indicar si están libres.
+	\item\textbf{Tabla de inodos:} Contiene todos los inodos del grupo de bloques. Cada inodo mantiene los metadatos asociados con una rchivo o directorio del SA.
+\end{itemize}
+
+Linux hace uso de un método de asignación de bloques no contiguo y cada bloque del SA es identificado por un número. Para montar y desmontar un sistema de archivos se hace uso de la llamada \textbf{mount}. Mount conecta un sistema de archivos al sistema de archivos existente y la llamada \textbf{umount} lo desconecta.

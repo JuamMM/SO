@@ -1,0 +1,3 @@
+#!/bin/bash
+
+date +"%j:%H:%M" >> ~/SO/listabusqueda

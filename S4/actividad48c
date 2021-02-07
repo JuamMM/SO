@@ -1,0 +1,4 @@
+#!/bin/bash
+#Para lanzar los archivos bastaría con la orden at <hora> -q <la cola que queremos>
+
+echo "Cola c" >> archivoPrueba

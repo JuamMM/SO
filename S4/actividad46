@@ -1,0 +1,7 @@
+#!/bin/bash
+#Para ejecutarla con at bastaría con usar:
+#> at now + 1 days
+#> ./actividad46
+#> ctrl-D
+
+find ./ -ctime -1>> modificados-$(date +"-%T")
