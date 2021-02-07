@@ -36,7 +36,7 @@ Es posible alterar el descriptor de archivo de los directorios para cambiar el t
 | D | D | 3-3-90 |6|
 | CARTAS | F | 13-3-90 |7|
 
-|-|-|-|
+|-|-|-|-|
 | **1** | FIN | **10**| FIN |
 | **2** | 4 | **11**| |
 | **3** |15 | **12**| |
@@ -49,8 +49,8 @@ Es posible alterar el descriptor de archivo de los directorios para cambiar el t
 
 4. **Si usamos un Mapa de Bits para la gestión del espacio libre, especifique la sucesión de bits que contendría respecto a los 18 bloques del ejercicio anterior.**
 
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |1|1|1|1|1|1|1|1|1|1|0|0|0|0|1|1|1|0|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 7. **Entre los posibles atributos de un archivo, existe un bit que marca un archivo como temporal y por lo tanto esta sujeto a destrucción automática cuando el proceso acaba ¿Cuál es la razón de esto? Después de todo un proceso siempre puede destruir sus archivos, si así lo decide.**
 
