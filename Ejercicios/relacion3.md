@@ -79,17 +79,11 @@ desactiva), y en qué momentos:**
 |Número de página virtual|Bit de presencia|Bit de refencia|Bit de modificación|Número de marco de página|
 |-|-|-|-|-|
 |0|0|1|0|4|
-|-|-|-|-|-|
 |1|1|1|1|7|
-|-|-|-|-|-|
 |2|1|0|0|1|
-|-|-|-|-|-|
 |3|1|0|0|2|
-|-|-|-|-|-|
 |4|0|0|0|X|
-|-|-|-|-|-|
 |5|1|0|1|0|
-|-|-|-|-|-|
 
 **¿Qué direcciones físicas, si existen, corresponderán con cada una de las siguientes direcciones virtuales? (no intente manejar ninguna falta de página, si las hubiese)**
 

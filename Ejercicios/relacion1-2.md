@@ -63,7 +63,6 @@ Es creciente puesto que el tiempo de espera del último proceso es igual al tiem
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
 |A|4|1|
-|-|-|-|
 |B|0|5|
 |C|1|4|
 |D|8|3|
@@ -90,30 +89,20 @@ Es creciente puesto que el tiempo de espera del último proceso es igual al tiem
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
 |A|4|1|
-|-|-|-|
 |B|0|5|
-|-|-|-|
 |C|1|4|
-|-|-|-|
 |D|8|3|
-|-|-|-|
 |E|12|2|
-|-|-|-|
 
 **a) Por Turnos con quantum q=1**
 
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |A| | | | | |X| | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |B|X|X| |X| | |X| |X| | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |C| | |X| |X| | |X| | |X| | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |D| | | | | | | | | |X| |X|X| | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |E| | | | | | | | | | | | | |X|X| |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 Tiempo de espera medio: 2.8s
 tiempo de respuesta medio: 0.8s
@@ -123,15 +112,10 @@ tiempo de respuesta medio: 0.8s
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |A| | | | | | | | | |X| | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |B|X|X|X|X| | | | |X| | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |C| | | | |X|X|X|X| | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |D| | | | | | | | | | |X|X|X| | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |E| | | | | | | | | | | | | |X|X| |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 Tiempo de espera medio: 3s
 tiempo de respuesta medio: 2.2s
@@ -143,15 +127,10 @@ Se asume que es apropiativo
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |A| | | | | |X| | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |B|X|X|X|X|X| | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |C| | | | | | |X|X|X|X| | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |D| | | | | | | | | | |X|X|X| | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |E| | | | | | | | | | | | | |X|X| |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 Tiempo de espera medio: 1.8s
 tiempo de respuesta medio: 1.8s
@@ -161,29 +140,19 @@ tiempo de respuesta medio: 1.8s
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
 |A|0|3|
-|-|-|-|
 |B|1|1|
-|-|-|-|
 |C|3|12|
-|-|-|-|
 |D|9|5|
-|-|-|-|
 |E|12|5|
-|-|-|-|
 
 
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |A|X| |X|X| | | | | | | | | | | | | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |B| |X| | | | | | | | | | | | | | | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |C| | | | |X|X|X|X|X| | | | | | | | | | |X|X|X|X|X|X|X|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |D| | | | | | | | | |X|X|X|X|X| | | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |E| | | | | | | | | | | | | | |X|X|X|X|X| | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 Tiempo de espera medio: 2.6s
 
@@ -192,24 +161,16 @@ Tiempo de espera medio: 2.6s
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
 |A|0|3|
-|-|-|-|
 |B|1|1|
-|-|-|-|
 |C|3|12|
-|-|-|-|
 |D|9|5|
-|-|-|-|
 |E|12|5|
-|-|-|-|
 
 |Cola|Prioridad|Quantum|
 |-|-|-|
 |1|1|1|
-|-|-|-|
 |2|2|2|
-|-|-|-|
 |3|3|4|
-|-|-|-|
 **y suponiendo que:**
 
 **(a) Todos los procesos inicialmente entran en la cola de mayor prioridad (menor valor numérico). Cada cola se gestiona mediante la política Por Turnos.
@@ -224,21 +185,13 @@ Tiempo de espera medio: 2.6s
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |A|X| |X|X| | | | | | | | | | | | | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |B| |X| | | | | | | | | | | | | | | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |C| | | | |X|X|X|X|X|X|X| | | | | | |X|X|X|X| | | |X| |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |D| | | | | | | | | | | |X|X|X| | | | | | | |X|X| | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |E| | | | | | | | | | | | | | |X|X|X| | | | | | |X| | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |Cola1|A|B| |C|C| | | | |D|D| |E|E| | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |Cola2| |A|A|A| |C| | | | | |D|D| |E|E| | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |Cola3| | | | | | |C|C|C|C|C|C|C|CD|CD|CDE|CDE|CDE|CDE|DEC|DEC|EC|C| |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 14. **Suponga que debe maximizar la eficiencia de un sistema multiusuario y que está recibiendo quejas de muchos usuarios sobre los pobres tiempos de respuesta (o tiempos de vuelta) de sus procesos. Los resultados obtenidos con una herramienta de monitorización del sistema nos muestran que la CPU se utiliza al 99'9% de su tiempo y que los procesadores de E/S están activos solo un 10% de su tiempo. ¿Cuales pueden ser las razones de estos tiempos de respuesta pobres y por qué?**
 
