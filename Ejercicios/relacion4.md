@@ -8,23 +8,23 @@ Es posible alterar el descriptor de archivo de los directorios para cambiar el t
 
 3. **En la siguiente figura se representa una tabla FAT. Al borde de sus entradas se ha escrito, como ayuda de referencia, el número correspondiente al bloque en cuestión. También se ha representado la entrada de cierto directorio. Como simplificación del ejemplo, suponemos que en cada entrada del directorio se almacena: Nombre de archivo/directorio, el tipo (F=archivo, D=directorio), la fecha de creación y el número del bloque inicial.**
 
-**Tenga en cuenta que:
+**Tenga en cuenta que:**
 
-- el tamaño de bloque es de 512 bytes
+- **el tamaño de bloque es de 512 bytes**
 
-- el FIN indica último bloque
+- **el FIN indica último bloque**
 
-- todo lo que está en blanco en la figura está libre.**
+- **todo lo que está en blanco en la figura está libre.**
 
-**a) Creación del archivo DATOS1 con fecha 1-3-90, y tamaño de 10 bytes.
+**a) Creación del archivo DATOS1 con fecha 1-3-90, y tamaño de 10 bytes.**
 
-b) Creación del archivo DATOS2 con fecha 2-3-90, y tamaño 1200 bytes.
+**b) Creación del archivo DATOS2 con fecha 2-3-90, y tamaño 1200 bytes.**
 
-c) El archivo DATOS aumenta de tamaño, necesitando 2 bloques más.
+**c) El archivo DATOS aumenta de tamaño, necesitando 2 bloques más.**
 
-d) Creación del directorio D, con fecha 3-3-90, y tamaño 1 bloque.
+**d) Creación del directorio D, con fecha 3-3-90, y tamaño 1 bloque.**
 
-e) Creación del archivo CARTAS con fecha 13-3-90 y tamaño 2 kBytes.**
+**e) Creación del archivo CARTAS con fecha 13-3-90 y tamaño 2 kBytes.**
 
 **Importante** en la relación de ejercicios original hay un erro y datos aparecen en el bloque 2 cuando debería aparecer en el 3, aquí se ha corregido. Los datos de las tablas en negrita son aquellos que se daban con el ejercicio.
 
@@ -36,7 +36,6 @@ e) Creación del archivo CARTAS con fecha 13-3-90 y tamaño 2 kBytes.**
 | D | D | 3-3-90 |6|
 | CARTAS | F | 13-3-90 |7|
 
-|Tabla FAT|
 |-|-|-|
 | **1** | FIN | **10**| FIN |
 | **2** | 4 | **11**| |
