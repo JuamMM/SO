@@ -22,11 +22,16 @@ Para ráfags muy cortas, los procesos han de pasar mucho tiempo esperando en la 
 
 
 3. **Para cada una de las llamadas al sistema siguientes, especificar y explicar si su procesamiento por el sistema operativo requiere la invocación del planificador a corto plazo:**
-	**a) Crear un proceso.** No, si acaba de cerase no puede encontrase en la cola de ejecutables
-	**b) Abortar un proceso, es decir, terminarlo forzosamente.** Sí, puesto que es necesario saber que proceso va a ejecutarse a continuación.
-	**c) Suspender o bloquear un proceso.** Sí, ya que es necasaro saber quién lo va a sustituir.
-	**d) Reanudar un proceso (inversa al caso anterior).** Es posible que que el proceso deba ejecutarse justo después de reanudarse.
-	**e) Modificar la prioridad de un proceso.** Si, al igual que en el caso anterior es necesario puesto que la nueva prioridad puede causar que deje de ejecutarse o pase a ejecutarse.
+
+	a) **Crear un proceso.**  No, si acaba de cerase no puede encontrase en la cola de ejecutables
+
+	b) **Abortar un proceso, es decir, terminarlo forzosamente.** Sí, puesto que es necesario saber que proceso va a ejecutarse a continuación.
+
+	c) **Suspender o bloquear un proceso.** Sí, ya que es necasaro saber quién lo va a sustituir.
+
+	d) **Reanudar un proceso (inversa al caso anterior).** Es posible que que el proceso deba ejecutarse justo después de reanudarse.
+
+	e) **Modificar la prioridad de un proceso.** Si, al igual que en el caso anterior es necesario puesto que la nueva prioridad puede causar que deje de ejecutarse o pase a ejecutarse.
 
 4. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto. ¿Cuál debe ser el valor de quantum Q para que el porcentaje de uso de la CPU por los procesos de usuario sea del 80%?**
 
@@ -60,28 +65,19 @@ Es creciente puesto que el tiempo de espera del último proceso es igual al tiem
 |A|4|1|
 |-|-|-|
 |B|0|5|
-|-|-|-|
 |C|1|4|
-|-|-|-|
 |D|8|3|
-|-|-|-|
 |E|12|2|
-|-|-|-|
 
 **Si suponemos que tenemos un algoritmo de planificación que utiliza una política FIFO (primero en llegar, primero en ser servido), calcula:**
 
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |A| | | | | | | | | | |X| | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |B|X|X|X|X|X| | | | | | | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |C| | | | | | |X|X|X|X| | | | | | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |D| | | | | | | | | | | |X|X|X| | |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |E| | | | | | | | | | | | | | |X|X|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
 **a) Tiempo medio de respuesta** 2.2
 
