@@ -36,6 +36,7 @@ Es posible alterar el descriptor de archivo de los directorios para cambiar el t
 | D | D | 3-3-90 |6|
 | CARTAS | F | 13-3-90 |7|
 
+|Nº bloque|referencia|Nº bloque|referencia|
 |-|-|-|-|
 | **1** | FIN | **10**| FIN |
 | **2** | 4 | **11**| |
