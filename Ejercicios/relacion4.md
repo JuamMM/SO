@@ -53,9 +53,22 @@ Es posible alterar el descriptor de archivo de los directorios para cambiar el t
 |1|1|1|1|1|1|1|1|1|1|0|0|0|0|1|1|1|0|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 
+5. **Si se pierde el primer puntero de la lista de espacio libre, ¿podría el Sistema Operativo reconstruirla? ¿Cómo?**
+
+Habria que buscar entre los bloque libres aquél que apunte a otro bloque pero no sea apuntado por ningún otro.
+
+6. **El espacio libre en disco puede ser implementado usando una lista encadenada con agrupación o un mapa de bits. La dirección en disco requiere D bits. Sea un disco con B bloques, en que F están libres. ¿En qué condición la lista usa menos espacio que el mapa de bits?**
+
+En el caso de mapa de bits este va a ocupar B bits, en la caso de la lista va a ocupar F*D bits luego siempre que F*D sea menor que B la lista encadenada ocupará menos espacio.
+
 7. **Entre los posibles atributos de un archivo, existe un bit que marca un archivo como temporal y por lo tanto esta sujeto a destrucción automática cuando el proceso acaba ¿Cuál es la razón de esto? Después de todo un proceso siempre puede destruir sus archivos, si así lo decide.**
 
 Un programa puede crear un archivo y bloquerarse o terminar forzosamente su ejecución sin llegar a la sección de código dónde se elimina el archivo. También aunque un proceso puede destruir sus archivos siempre es posible que se nos olvide añadir la línea de código para hacerlo, marcando un archivo como temporal nos aseguramos de que pase lo que pase dicho archivo desaparecerá.
 
+8. **Algunos SO proporcionan una llamada al sistema (RENAME) para dar un nombre nuevo a un archivo existente ¿Existe alguna diferencia entre utilizar esta llamada para renombrar un archivo y copiar el archivo a uno nuevo, con el nuevo nombre y destruyendo el antiguo?**
 
+La llamada RENAME conserva los enlaces duros y simbólicos del archivo.
 
+9. **Un i-nodo de UNIX tiene 10 direcciones de disco para los diez primeros bloques de datos, y tres direcciones más para realizar una indexación a uno, dos y tres niveles. Si cada bloque índice tiene 256 direcciones de bloques de disco, cuál es el tamaño del mayor archivo que puede ser manejado, suponiendo que 1 bloque de disco es de 1KByte?**
+
+256^3 KB

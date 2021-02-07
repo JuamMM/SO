@@ -93,3 +93,70 @@ desactiva), y en qué momentos:**
 
 **c) 5400** Está en la página 5 luego marco 0 y su desplazamiento es 280, lo que equivale a su dirección física.
 
+12. **Sea la siguiente secuencia de números de página referenciados: 1,2,3,4,1,2,5,1,2,3,4,5 Calcula el número de faltas de página que se producen utilizando el algoritmo FIFO y considerando que el número de marcos de página de que disfruta nuestro proceso es de**
+
+**a) 3 marcos**
+
+|1|2|3|4|1|2|5|1|2|3|4|5|
+|-|-|-|-|-|-|-|-|-|-|-|-|
+|1|1|1|4|4|4|5|5|5|5|5|5|
+| |2|2|2|1|1|1|1|1|3|3|3|
+| | |3|3|3|2|2|2|2|2|4|4|
+|X|X|X|X|X|X|X| | |X|X| |
+
+9 faltas de página
+
+**a) 4 marcos**
+
+|1|2|3|4|1|2|5|1|2|3|4|5|
+|-|-|-|-|-|-|-|-|-|-|-|-|
+|1|1|1|1|1|1|5|5|5|5|4|4|
+| |2|2|2|2|2|2|1|1|1|1|5|
+| | |3|3|3|3|3|3|2|2|2|2|
+| | | |4|4|4|4|4|4|3|3|3|
+|X|X|X|X| | |X|X|X|X|X|X|
+
+10 faltas de página.
+
+**¿Se corresponde esto con el comportamiento intuitivo de que disminuirá el número de faltas de página al aumentar el tamaño de memoria de que disfruta el proceso?**
+
+No puesto que el problema no es la memoria sino el algoritmo de sustitución.
+
+13. **¿Por qué la localidad no es un factor que se tiene en cuenta en los sistemas con segmentación?**
+
+Porque la memoria virtual no se agrupa contiguamente en el caso de segmentación, luego no podemos basarnos en la cercanía para tratar de averiguar que sección se ejecutará después.
+
+14. **En la gestión de memoria en un sistema paginado, ¿qué estructura/s de datos necesitará mantener el Sistema Operativo para administrar el espacio libre?**
+
+Preguntar a profesora.
+
+Se deberá emplear una estructura de datos que sirva de representación de las páginas, y nos indiué dónde están ubicadas, y si son limpias o sucias.
+
+15. **¿Cuánto puede avanzar como máximo la aguja del algoritmo de reemplazo de páginas del reloj durante la selección de una página?**
+Hasta da una vuelta completa y volver a la primera página que se comprobó, es decir, supongamos que es la primera vez que ejecutamos el algoritmo, en este caso todas las páginas tienen su bit de referencia (R) a 1. Conforme la recorra irá modificando R para que valga 0 pero deberá recorré todas las páginas.
+
+16. **Situándonos en un sistema paginado, donde cada proceso tiene asignado un número fijo de marcos de páginas. Supongamos la siguiente situación: existe un proceso con 7 páginas y tiene asignados 5 marcos de página. Indica el contenido de la memoria después de cada referencia a una página si como algoritmo de sustitución de página utilizamos el LRU (la página no referenciada hace más tiempo). La secuencia de referencias es la indicada en la figura.**
+
+|2|1|3|4|1|5|6|4|5|7|4|2|
+|-|-|-|-|-|-|-|-|-|-|-|-|
+|2|2|2|2|2|2|6|6|6|6|6|6|
+| |1|1|1|1|1|1|1|1|1|1|2|
+| | |3|3|3|3|3|3|3|7|7|7|
+| | | |4|4|4|4|4|4|4|4|4|
+| | | | | |5|5|5|5|5|5|5|
+|X|X|X|X| |X|X| | |X| |X|
+
+Se producen 8 faltas de página.
+
+17. **¿Cuál es la ventaja del algoritmo de faltas de página sobre el algoritmo basado en el modelo del conjunto de trabajo utilizando el tamaño de ventana w? ¿Cuál es la desventaja?**
+
+FFP elimina aquellas páginas que no se referenciasen en el intervalo entre la actual falta de página, luego mientras no se produzcan faltas de página FFP no elimnará ningna página al contrario que WS. Sin embargo si se producen 2 faltas de página en un intervalo de tiempo pequeño FFP eliminará una gran cantidad de páginas.
+
+18. **Supongamos que tenemos un proceso ejecutándose en un sistema paginado, con gestión de memoria basada en el algoritmo de sustitución frecuencia de faltas de página. El proceso tiene 5 páginas ( 0, 1, 2, 3, 4 ). Represente el contenido de la memoria real para ese proceso (es decir, indique que páginas tiene cargadas en cada momento) y cuándo se produce una falta de página. Suponga que, inicialmente, está cargada la página 2, el resto de páginas están en memoria secundaria y que no hay restricciones en cuanto al número de marcos de página disponibles. La cadena de referencias a página es: 0 3 1 1 1 3 4 4 2 2 4 0 0 0 0 3 y el parámetro es τ=3.**
+
+|0|3|1|1|1|3|4|4|2|2|4|0|0|0|0|3|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|2|3|3|3|3|3|3|3|2|2|2|2|2|2|2|3|
+|0|0|1|1|1|1|1|1| | | |0|0|0|0|0|
+| | | | | | |4|4|4|4|4|4|4|4|4| |
+|X|X|X| | | |X| |X| | |X| | | |X|
