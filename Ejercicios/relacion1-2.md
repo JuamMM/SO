@@ -208,3 +208,13 @@ Tiempo de espera medio: 2.6s
 16. **¿El planificador CFS de Linux favorece a los procesos limitados por E/S (cortos) frente a los procesos limitados por CPU (largos)? Explique cómo lo hace.**
 
 El planificador completamente justo se basa en elaborar un árbol de búsqueda en el que se almacenan las futuras tareas, las hojas son procesos sueltos, mientras que los nodos son conjuntos de tareas, de entre los nodos selecciona aquél que tenga menor runtime para el nivel que se está explorando y lo expande. Si se trata de un nodo hoja (proceso) selecciona ese proceso para ejecutar y actualiza el árbol.
+
+17. **¿Cuál es el problema que se plantea en Linux cuando un proceso no realiza la llamada al sistema wait para cada uno de sus procesos hijos que han terminado su ejecución? ¿Qué efecto puede producir esto en el sistema?**
+
+Los procesos hijo pasan a considerarse procesos zombie, los procesos zombie aunque no se estén ejecutando se mantienen en la tabla de procesos lo que implica que ocupan espacio a pesar de no estar haciendo nada puesto que su ejecución ya a finalizado.
+
+18. **La orden clone sirve tanto para crear un proceso en Linux como una hebra. a) Escriba los argumentos que debería tener clone para crear un proceso y una hebra. b) Dibuje las principales estructuras de datos del kernel que reflejan las diferencias entre ambas.**
+
+clone(funcion,pila_hijo,flags_apropiados)
+
+Una proceso es una instancia de un programa en ejecución, mientras que una hebra es una unidad de utilización de la CPU, si le asignásemos una tarea(sección de código, datos y recuros) a la hebra esta sería esencialmente un proceso.

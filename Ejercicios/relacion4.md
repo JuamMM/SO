@@ -71,4 +71,31 @@ La llamada RENAME conserva los enlaces duros y simbólicos del archivo.
 
 9. **Un i-nodo de UNIX tiene 10 direcciones de disco para los diez primeros bloques de datos, y tres direcciones más para realizar una indexación a uno, dos y tres niveles. Si cada bloque índice tiene 256 direcciones de bloques de disco, cuál es el tamaño del mayor archivo que puede ser manejado, suponiendo que 1 bloque de disco es de 1KByte?**
 
-256^3 KB
+Las primeras 10 direcciones apuntan a los 10 primeros bloques de datos luego tenemos un total de 10KB.
+Como disponemos de indexación a 1,2 y3 niveles tenemos en total 256KB + 256^2KB + 256^3KB de espacio, en total: 16GB.
+
+10. **Sobre conversión de direcciones lógicas dentro de un archivo a direcciones físicas de disco. Estamos utilizando la estrategia de indexación a tres niveles para asignar espacio en disco. Tenemos que el tamaño de bloque es igual a 512 bytes, y el tamaño de puntero es de 4 bytes. Se recibe la solicitud por parte de un proceso de usuario de leer el carácter número N de determinado archivo. Suponemos que ya hemos leído la entrada del directorio asociada a este archivo, es decir, tenemos en memoria los datos PRIMER- BLOQUE y TAMAÑO. Calcule la sucesión de direcciones de bloque que se leen hasta llegar al bloque de datos que posee el citado carácter.**
+
+Como cada bloque almacena 512 bytes y un puntero son 4 bytes cada bloque puede almacenar un máximo de 128 punteros, es decir puede redireccionar 128 bloques.
+
+N'   = N   % 512*128*128
+N''  = N'  % 512*128
+N''' = N'' % 512
+
+Se leen un total de N'+N''+N''' bloques.
+
+11. **¿Qué método de asignación de espacio en un sistema de archivos elegiría para maximizar la eficiencia en términos de velocidad de acceso, uso del espacio de almacenamiento y facilidad de modificación (añadir/borrar /modificar), cuando los datos son:**
+
+**a) modificados infrecuentemente, y accedidos frecuentemente de forma aleatoria** Contiguo puesto que permite un acceso sencillo y rápido a los datos.
+
+**b) modificados con frecuencia, y accedidos en su totalidad con cierta frecuencia** Enlazados ya que vamos a accederlos todos con frecuencia y al ser modificados frecuentemente vamos a tener que expandir su tamaño en ocasiones. Mediante los bloques libres del enlazado no sería necesaria compactación.
+
+**c) modificados frecuentemente y accedidos aleatoriamente y frecuentemente** Indexado al ser modificados frecuentemente nos interesa poder aumentar su espacio de forma sencilla y como serán accedidos aleatoriamente nos interesa indexación que no ofrece un acceso directo más efectivo que el enlazado.
+
+12. **¿Cuál es el tamaño que ocupan todas las entradas de una tabla FAT32 que son necesarias para referenciar los cluster de datos, cuyo tamaño es de 16 KB, de una partición de 20 GB ocupada exclusivamente por la propia FAT32 y dichos cluster de datos?**
+
+Se asume que FAT32 es una lista enlazada, luego al ser 32b disponemos de 4B por entrada. Si tenemos 20GB sólo para la FAT y el cluster de datos eso quiere decir que 20GB = (4B+16KB)*nº entradas. Luego el número de entradas es igual a 20GB/(4B+16KB), lo que nos da un total de 1310400 entradas si cada entrada son 4B tenemos que ocupan un total de 5MB aproximadamente.
+
+13. **Cuando en un sistema Unix/Linux se abre el archivo /usr/ast/work/f, se necesitan varios accesos a disco. Calcule el número de accesos a disco requeridos (como máximo) bajo la suposición de que el i-nodo raíz ya se encuentra en memoria y que todos los directorios necesitan como máximo 1 bloque para almacenar los datos de sus archivos.**
+
+Sería necesario un acceso a disco para acceder al inodo y otro acceso a disco para cargar el único bloque de datos, luego tendríamos que leer el inodo de usr y luego su bloque, lo mismo para ast y work, es decir serían necesarios un total de 6 accesos a disco.
