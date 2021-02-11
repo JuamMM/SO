@@ -10,7 +10,7 @@ Cuando un proceso se bloquea el SO se encarga de alterar sus valores.
 
 **c)¿Qué  debería  hacer  el  planificador  a  corto  plazo  cuando  es  invocado  pero  no  hay ningún proceso en la cola de ejecutables?**
 
-Exise un proceso denominada proceso nulo con prioridad ínfima de forma que nunca se ejecute si hay otro proceso en la cola de ejecutables, en caso de que la cola de ejecutable esté vací se lleva el proceso nulo a ella.
+Exise un proceso denominado proceso nulo con prioridad ínfima de forma que nunca se ejecute si hay otro proceso en la cola de ejecutables, en caso de que la cola de ejecutable esté vací se lleva el proceso nulo a ella.
 
 **d)¿Qué algoritmos de planificación quedan descartados para ser utilizados en sistemas de tiempo compartido?**
 
