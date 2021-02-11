@@ -4,9 +4,9 @@ El cargador deberá encargarse de escribir los datos modificados y la pila en me
 
 2. **Considere un sistema con un espacio lógico de memoria de 128K páginas (máximo espacio de memoria virtual) con 8 KB cada una, una memoria física de 64 MB y direccionamiento al nivel de byte. ¿Cuántos bits hay en la dirección lógica? ¿Y en la física?**
 
-30 bits la dirección lógica (128K = 2^7*2^10, 8K = 2^3+2^10 = 2^30)
+30 bits la dirección lógica (128K = 2^7*2^10, 8K = 2^3+2^10 = 2^83b)
 
-13 bits para la dirección física (64MB = 2^6*2^10*2^10, 8KB = 2^3*2^10, dividimos y obtenemos 2^6*2^7 = 2^13).
+13 bits para la dirección física (64MB = 2^6*2^10*2^10, 8KB = 2^3*2^10, dividimos y obtenemos 2^6*2^7 = 2^13b).
 
 3. **Considérese un sistema con memoria virtual en el que el procesador tiene una tasa de utilización del 15% y el dispositivo de paginación está ocupado el 97% del tiempo, ¿qué indican estas medidas? ¿Y si con el mismo porcentaje de uso del procesador el porcentaje de uso del dispositivo de paginación fuera del 15%?**
 
