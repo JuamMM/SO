@@ -16,12 +16,12 @@ Exise un proceso denominado proceso nulo con prioridad ínfima de forma que nunc
 
 Cualquier algoritmo no apropiativo no puede ser empleado en sistemas de tiempo compartido, ya que podríamos tener usuarios incapaces de acceder a recursos durante grandes periodos de tiempo.
 
-2. **La representación gráfica del cociente [(tiempo_en_cola_ejecutables + tiempo_de_CPU) / tiempo_de_CPU ] frente a tiempo_de_CPU suele mostrar valores muy altos para ráfagas muy cortas en casi todos los algoritmos de asignación de CPU. ¿Por qué?**
+### 2. **La representación gráfica del cociente [(tiempo_en_cola_ejecutables + tiempo_de_CPU) / tiempo_de_CPU ] frente a tiempo_de_CPU suele mostrar valores muy altos para ráfagas muy cortas en casi todos los algoritmos de asignación de CPU. ¿Por qué?**
 
 Para ráfags muy cortas, los procesos han de pasar mucho tiempo esperando en la cola de ejectutables y muy poco tiempo ejecutando, luego es normal que el cociente sea elevado.
 
 
-3. **Para cada una de las llamadas al sistema siguientes, especificar y explicar si su procesamiento por el sistema operativo requiere la invocación del planificador a corto plazo:**
+### 3. **Para cada una de las llamadas al sistema siguientes, especificar y explicar si su procesamiento por el sistema operativo requiere la invocación del planificador a corto plazo:**
 
 	a) **Crear un proceso.**  No, si acaba de cerase no puede encontrase en la cola de ejecutables
 
@@ -33,32 +33,32 @@ Para ráfags muy cortas, los procesos han de pasar mucho tiempo esperando en la 
 
 	e) **Modificar la prioridad de un proceso.** Si, al igual que en el caso anterior es necesario puesto que la nueva prioridad puede causar que deje de ejecutarse o pase a ejecutarse.
 
-4. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto. ¿Cuál debe ser el valor de quantum Q para que el porcentaje de uso de la CPU por los procesos de usuario sea del 80%?**
+### 4. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto. ¿Cuál debe ser el valor de quantum Q para que el porcentaje de uso de la CPU por los procesos de usuario sea del 80%?**
 
 8*s.
 
-5. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto, y N el número de procesos existente. ¿Cuál debe ser el valor de quantum Q para que se asegure que cada proceso “ve” la CPU al menos cada T segundos?**
+### 5. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto, y N el número de procesos existente. ¿Cuál debe ser el valor de quantum Q para que se asegure que cada proceso “ve” la CPU al menos cada T segundos?**
 
 Q = T/(N-1) -S.
 
-6. **¿Tiene sentido mantener ordenada por prioridades la cola de procesos bloqueados? Si lo tuviera, ¿en qué casos sería útil hacerlo?**
+### 6. **¿Tiene sentido mantener ordenada por prioridades la cola de procesos bloqueados? Si lo tuviera, ¿en qué casos sería útil hacerlo?**
 
 La cola de bloqueados no tiene por que estar ordenada puesto que cuando dejen de estar bloqueados pasarán a la cola de preparados.
 
-7. **¿Puede el procesador manejar una interrupción mientras está ejecutando un proceso si la política de planificación que utilizamos es no apropiativa?**
+### 7. **¿Puede el procesador manejar una interrupción mientras está ejecutando un proceso si la política de planificación que utilizamos es no apropiativa?**
 
 Se produce un cambio de contexto y se trata la interrupción, luego se realiza otro cambio de contexto y se continúa la ejecución del proceso.
 
-8. **Suponga que es responsable de diseñar e implementar un sistema operativo que va a utilizar una política de planificación apropiativa. Suponiendo que tenemos desarrollado el algoritmo de planificación a tal efecto, ¿qué otras partes del sistema operativo habría que modificar para implementar tal sistema? y ¿cuáles serían tales modificaciones?**
+### 8. **Suponga que es responsable de diseñar e implementar un sistema operativo que va a utilizar una política de planificación apropiativa. Suponiendo que tenemos desarrollado el algoritmo de planificación a tal efecto, ¿qué otras partes del sistema operativo habría que modificar para implementar tal sistema? y ¿cuáles serían tales modificaciones?**
 
 Es necesario modificar el sistema operativo para el manejo de interrupciones apropiado y asegurar que las tareas se reanudan en el estado en el que se encontraban antes de ser interrumpidas, salvar los PCB de cada proceso y distribuir adeacuadamente el uso de la CPU de cada uno de ellos.
 
 
-9. **En el algoritmo de planificación FCFS, la penalización ( (t + tº de espera) / t ), ¿es creciente, decreciente o constante respecto a t (tiempo de servicio de CPU requerido por un proceso)? Justifique su respuesta.**
+### 9. **En el algoritmo de planificación FCFS, la penalización ( (t + tº de espera) / t ), ¿es creciente, decreciente o constante respecto a t (tiempo de servicio de CPU requerido por un proceso)? Justifique su respuesta.**
 
 Es creciente puesto que el tiempo de espera del último proceso es igual al tiempo de servicio de CPU requerido por cada uno de los procesos anteriores.
 
-10. **En la tabla siguiente se describen cinco procesos:**
+### 10. **En la tabla siguiente se describen cinco procesos:**
 
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
@@ -84,7 +84,7 @@ Es creciente puesto que el tiempo de espera del último proceso es igual al tiem
 
 **c) La penalización, es decir, el cociente entre el tiempo de respuesta y el tiempo de CPU.** 1.81
 
-11. **Utilizando los valores de la tabla del problema anterior, calcula los tiempos medios de espera y respuesta para los siguientes algoritmos:**
+### 11. **Utilizando los valores de la tabla del problema anterior, calcula los tiempos medios de espera y respuesta para los siguientes algoritmos:**
 
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
@@ -135,7 +135,7 @@ Se asume que es apropiativo
 Tiempo de espera medio: 1.8s
 tiempo de respuesta medio: 1.8s
 
-12. **Calcula el tiempo de espera medio para los procesos de la tabla utilizando el algoritmo: el primero más corto apropiativo (o primero el de tiempo restante menor, SRTF).**
+### 12. **Calcula el tiempo de espera medio para los procesos de la tabla utilizando el algoritmo: el primero más corto apropiativo (o primero el de tiempo restante menor, SRTF).**
 
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
@@ -156,7 +156,7 @@ tiempo de respuesta medio: 1.8s
 
 Tiempo de espera medio: 2.6s
 
-13. **Utilizando la tabla del ejercicio anterior, dibuja el diagrama de ocupación de CPU para el caso de un sistema que utiliza un algoritmo de colas múltiples con realimentación con las siguientes colas:**
+### 13. **Utilizando la tabla del ejercicio anterior, dibuja el diagrama de ocupación de CPU para el caso de un sistema que utiliza un algoritmo de colas múltiples con realimentación con las siguientes colas:**
 
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
@@ -193,7 +193,7 @@ Tiempo de espera medio: 2.6s
 |Cola2| |A|A|A| |C| | | | | |D|D| |E|E|E| | | | | | | |
 |Cola3| | | | | | |C|C|C|C|C|C|C|CD|CD|CD|CD|CDE|CDE|CDE|CDE|DEC|DEC|EC|C |
 
-14. **Suponga que debe maximizar la eficiencia de un sistema multiusuario y que está recibiendo quejas de muchos usuarios sobre los pobres tiempos de respuesta (o tiempos de vuelta) de sus procesos. Los resultados obtenidos con una herramienta de monitorización del sistema nos muestran que la CPU se utiliza al 99'9% de su tiempo y que los procesadores de E/S están activos solo un 10% de su tiempo. ¿Cuales pueden ser las razones de estos tiempos de respuesta pobres y por qué?**
+### 14. **Suponga que debe maximizar la eficiencia de un sistema multiusuario y que está recibiendo quejas de muchos usuarios sobre los pobres tiempos de respuesta (o tiempos de vuelta) de sus procesos. Los resultados obtenidos con una herramienta de monitorización del sistema nos muestran que la CPU se utiliza al 99'9% de su tiempo y que los procesadores de E/S están activos solo un 10% de su tiempo. ¿Cuales pueden ser las razones de estos tiempos de respuesta pobres y por qué?**
 
 **a) El quantum en la planificación Round-Robin es muy pequeño.** En este caso todos los procesos deberían ejecutarse de forma regular y el porcentaje del uso de E/S sería mayor.
 
@@ -205,15 +205,15 @@ Tiempo de espera medio: 2.6s
 
 **e) El quantum en la planificación Round-Robin es muy grande.** Es posible ya que un único porceso de ususario podría acaparla CPU durante largos periodos de tiempo.
 
-16. **¿El planificador CFS de Linux favorece a los procesos limitados por E/S (cortos) frente a los procesos limitados por CPU (largos)? Explique cómo lo hace.**
+### 16. **¿El planificador CFS de Linux favorece a los procesos limitados por E/S (cortos) frente a los procesos limitados por CPU (largos)? Explique cómo lo hace.**
 
 El planificador completamente justo se basa en elaborar un árbol de búsqueda en el que se almacenan las futuras tareas, las hojas son procesos sueltos, mientras que los nodos son conjuntos de tareas, de entre los nodos selecciona aquél que tenga menor runtime para el nivel que se está explorando y lo expande. Si se trata de un nodo hoja (proceso) selecciona ese proceso para ejecutar y actualiza el árbol.
 
-17. **¿Cuál es el problema que se plantea en Linux cuando un proceso no realiza la llamada al sistema wait para cada uno de sus procesos hijos que han terminado su ejecución? ¿Qué efecto puede producir esto en el sistema?**
+### 17. **¿Cuál es el problema que se plantea en Linux cuando un proceso no realiza la llamada al sistema wait para cada uno de sus procesos hijos que han terminado su ejecución? ¿Qué efecto puede producir esto en el sistema?**
 
 Los procesos hijo pasan a considerarse procesos zombie, los procesos zombie aunque no se estén ejecutando se mantienen en la tabla de procesos lo que implica que ocupan espacio a pesar de no estar haciendo nada puesto que su ejecución ya a finalizado.
 
-18. **La orden clone sirve tanto para crear un proceso en Linux como una hebra. a) Escriba los argumentos que debería tener clone para crear un proceso y una hebra. b) Dibuje las principales estructuras de datos del kernel que reflejan las diferencias entre ambas.**
+### 18. **La orden clone sirve tanto para crear un proceso en Linux como una hebra. a) Escriba los argumentos que debería tener clone para crear un proceso y una hebra. b) Dibuje las principales estructuras de datos del kernel que reflejan las diferencias entre ambas.**
 
 clone(funcion,pila_hijo,flags_apropiados)
 
