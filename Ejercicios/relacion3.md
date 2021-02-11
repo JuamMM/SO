@@ -4,7 +4,7 @@ El cargador deberá encargarse de escribir los datos modificados y la pila en me
 
 2. **Considere un sistema con un espacio lógico de memoria de 128K páginas (máximo espacio de memoria virtual) con 8 KB cada una, una memoria física de 64 MB y direccionamiento al nivel de byte. ¿Cuántos bits hay en la dirección lógica? ¿Y en la física?**
 
-30 bits la dirección lógica (128K = 2^7*2^10, 8K = 2^3+2^10 = 2^83b)
+83 bits la dirección lógica (128K = 2^7*2^10, 8K = 2^3+2^10 = 2^83b)
 
 13 bits para la dirección física (64MB = 2^6*2^10*2^10, 8KB = 2^3*2^10, dividimos y obtenemos 2^6*2^7 = 2^13b).
 
