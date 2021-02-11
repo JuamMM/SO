@@ -12,11 +12,11 @@ El cargador deberá encargarse de escribir los datos modificados y la pila en me
 
 Nos indica que el procesador dedica mucho tiempo a resolver faltas de página.
 
-Ni idea - Preguntar a la profesora.
+En este caso habría pocos procesos en la cola.
 
 4. **Sea un sistema de memoria virtual paginada con direcciones lógicas de 32 bits que proporciona un espacio virtual de 2^20 páginas y con una memoria física de 32 Mbytes ¿cuánta memoria requiere en total un proceso que tenga 453Kbytes, incluida su tabla de páginas cuyas entradas son de 32 bits?**
 
-???
+se requieren 20 bits para las páginas luego el tamaño de página es 2^12B = 4096B si tenemos 453KB = 453*2^10B. 453B/2^2B = 114 páginas = 3648b.
 
 5. **Un ordenador tiene 4 marcos de página. En la siguiente tabla se muestran: el tiempo de carga, el tiempo del último acceso y los bits R y M para cada página (los tiempos está en tics de reloj). Responda a las siguientes cuestiones justificando su respuesta.**
 

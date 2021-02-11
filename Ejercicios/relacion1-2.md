@@ -10,7 +10,7 @@ Cuando un proceso se bloquea el SO se encarga de alterar sus valores.
 
 **c)¿Qué  debería  hacer  el  planificador  a  corto  plazo  cuando  es  invocado  pero  no  hay ningún proceso en la cola de ejecutables?**
 
----
+Exise un proceso denominada proceso nulo con prioridad ínfima de forma que nunca se ejecute si hay otro proceso en la cola de ejecutables, en caso de que la cola de ejecutable esté vací se lleva el proceso nulo a ella.
 
 **d)¿Qué algoritmos de planificación quedan descartados para ser utilizados en sistemas de tiempo compartido?**
 
@@ -47,7 +47,7 @@ La cola de bloqueados no tiene por que estar ordenada puesto que cuando dejen de
 
 7. **¿Puede el procesador manejar una interrupción mientras está ejecutando un proceso si la política de planificación que utilizamos es no apropiativa?**
 
-Se esperaría a completar el quantum o la ejecución del proceso para manejar la interrupción.
+Se produce un cambio de contexto y se trata la interrupción, luego se realiza otro cambio de contexto y se continúa la ejecución del proceso.
 
 8. **Suponga que es responsable de diseñar e implementar un sistema operativo que va a utilizar una política de planificación apropiativa. Suponiendo que tenemos desarrollado el algoritmo de planificación a tal efecto, ¿qué otras partes del sistema operativo habría que modificar para implementar tal sistema? y ¿cuáles serían tales modificaciones?**
 
@@ -197,13 +197,13 @@ Tiempo de espera medio: 2.6s
 
 **a) El quantum en la planificación Round-Robin es muy pequeño.** En este caso todos los procesos deberían ejecutarse de forma regular y el porcentaje del uso de E/S sería mayor.
 
-**b) La memoria principal es insuficiente.**
+**b) La memoria principal es insuficiente.** Si este fuese el caso el problema se mantendría en todo momento no ahora.
 
-**c) El sistema operativo tiene que manejar mucha memoria principal por lo que las rutinas de gestión de memoria están consumiendo todos los ciclos de CPU.**
+**c) El sistema operativo tiene que manejar mucha memoria principal por lo que las rutinas de gestión de memoria están consumiendo todos los ciclos de CPU.** Si este fuese el caso el problema se mantendría en todo momento no ahora.
 
-**d) La CPU es muy lenta.**
+**d) La CPU es muy lenta.** Si este fuese el caso el problema se mantendría en todo momento no ahora.
 
-**e) El quantum en la planificación Round-Robin es muy grande.** Es posible ya que un único porceso de ususario podría acaparla CPU durante lasrgos periodos de tiempo.
+**e) El quantum en la planificación Round-Robin es muy grande.** Es posible ya que un único porceso de ususario podría acaparla CPU durante largos periodos de tiempo.
 
 16. **¿El planificador CFS de Linux favorece a los procesos limitados por E/S (cortos) frente a los procesos limitados por CPU (largos)? Explique cómo lo hace.**
 
