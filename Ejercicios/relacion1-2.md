@@ -60,6 +60,8 @@ Es creciente puesto que el tiempo de espera del último proceso es igual al tiem
 
 ### 10. **En la tabla siguiente se describen cinco procesos:**
 
+**Nota** Para todos los ejercicios de planificación se ha asumido que cuando un proceso se bloquea en el mismo quantum que otro se crea. El primero en entrar a la cola es el proceso bloqueado.
+
 |Proceso|Tiempo de creacion|Tiempo de CPU|
 |-|-|-|
 |A|4|1|
