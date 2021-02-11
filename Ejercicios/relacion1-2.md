@@ -1,4 +1,4 @@
-1. **Cuestiones sobre procesos, y asignación de CPU:**
+### 1. **Cuestiones sobre procesos, y asignación de CPU:**
 
 **a)¿Es necesario que lo último que haga todo proceso antes de finalizar sea una llamada al sistema para finalizar? ¿Sigue siendo esto cierto en sistemas monoprogramados?**
 
