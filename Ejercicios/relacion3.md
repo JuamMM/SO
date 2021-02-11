@@ -54,7 +54,7 @@ Como tenemos 65536B y páginas de 4096B tenemos un total de 16 páginas en memor
 
 15878/4096 = 3.87 ergo 4 páginas.
 
-En total se requieren de 17 y tan sólo tenemos 16, no es posible albergar toda la totalidad del programma en el esquema de paginación. Sería posible si reducimos el tamaño de las páginas como se ha visto la región de datos ocupa una ínfima parte de su última página, la cuál podría emplearse para albergar la región de pila.
+En total se requieren de 17 y tan sólo tenemos 16, no es posible albergar toda la totalidad del programa en el esquema de paginación. Sería posible si reducimos el tamaño de las páginas como se ha visto la región de datos ocupa una ínfima parte de su última página, la cuál podría emplearse para albergar la región de pila.
 
 9. **Analice qué puede ocurrir en un sistema que usa paginación por demanda si se recompila un programa mientras se está ejecutando. Proponga soluciones a los problemas que pueden surgir en esta situación.**
 
@@ -128,9 +128,7 @@ Porque la memoria virtual no se agrupa contiguamente en el caso de segmentación
 
 14. **En la gestión de memoria en un sistema paginado, ¿qué estructura/s de datos necesitará mantener el Sistema Operativo para administrar el espacio libre?**
 
-Preguntar a profesora.
-
-Se deberá emplear una estructura de datos que sirva de representación de las páginas, y nos indiué dónde están ubicadas, y si son limpias o sucias.
+Se deberá emplear una estructura de datos que sirva de representación de las páginas, y nos indique dónde están ubicadas, y si son limpias o sucias.
 
 15. **¿Cuánto puede avanzar como máximo la aguja del algoritmo de reemplazo de páginas del reloj durante la selección de una página?**
 Hasta da una vuelta completa y volver a la primera página que se comprobó, es decir, supongamos que es la primera vez que ejecutamos el algoritmo, en este caso todas las páginas tienen su bit de referencia (R) a 1. Conforme la recorra irá modificando R para que valga 0 pero deberá recorré todas las páginas.
