@@ -35,7 +35,7 @@ Para ráfags muy cortas, los procesos han de pasar mucho tiempo esperando en la 
 
 ### 4. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto. ¿Cuál debe ser el valor de quantum Q para que el porcentaje de uso de la CPU por los procesos de usuario sea del 80%?**
 
-8*s.
+Tenemos que el tiempo total de la CPU es igual a S+Q y que queremos que el 80% de ese tiempo el uso de la CPU sea por procesos de ususario. Lo que nos da la fórmula Q/(S+Q) = 0.8, si despejamos obtenemos que Q = 4S.
 
 ### 5. **Sea un sistema multiprogramado que utiliza el algoritmo Por Turnos (Round-Robin). Sea S el tiempo que tarda el despachador en cada cambio de contexto, y N el número de procesos existente. ¿Cuál debe ser el valor de quantum Q para que se asegure que cada proceso “ve” la CPU al menos cada T segundos?**
 
