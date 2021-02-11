@@ -72,11 +72,11 @@ Es creciente puesto que el tiempo de espera del último proceso es igual al tiem
 
 |-|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|A| | | | | | | | | | |X| | | | | |
+|A| | | | | | | | | |X| | | | | | |
 |B|X|X|X|X|X| | | | | | | | | | | |
-|C| | | | | | |X|X|X|X| | | | | | |
-|D| | | | | | | | | | | |X|X|X| | |
-|E| | | | | | | | | | | | | | |X|X|
+|C| | | | | |X|X|X|X| | | | | | | |
+|D| | | | | | | | | | |X|X|X| | | |
+|E| | | | | | | | | | | | | |X|X| |
 
 **a) Tiempo medio de respuesta** 2.2
 
