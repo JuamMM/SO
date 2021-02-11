@@ -219,4 +219,4 @@ Los procesos hijo pasan a considerarse procesos zombie, los procesos zombie aunq
 
 clone(funcion,pila_hijo,flags_apropiados)
 
-Una proceso es una instancia de un programa en ejecución, mientras que una hebra es una unidad de utilización de la CPU, Un proceso consta de una o más hebras
+Una proceso es una instancia de un programa en ejecución, mientras que una hebra es una unidad de utilización de la CPU, Un proceso consta de una o más hebras, además de el código y espacio de direcciones.
