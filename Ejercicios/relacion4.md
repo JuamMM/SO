@@ -59,7 +59,7 @@ Habria que buscar entre los bloque libres aquél que apunte a otro bloque pero n
 
 6. **El espacio libre en disco puede ser implementado usando una lista encadenada con agrupación o un mapa de bits. La dirección en disco requiere D bits. Sea un disco con B bloques, en que F están libres. ¿En qué condición la lista usa menos espacio que el mapa de bits?**
 
-En el caso de mapa de bits este va a ocupar B bits, en la caso de la lista va a ocupar F*D bits luego siempre que F*D sea menor que B la lista encadenada ocupará menos espacio.
+En el caso de mapa de bits este va a ocupar B bits, en la caso de la lista va a ocupar F * D bits luego siempre que F * D sea menor que B la lista encadenada ocupará menos espacio.
 
 7. **Entre los posibles atributos de un archivo, existe un bit que marca un archivo como temporal y por lo tanto esta sujeto a destrucción automática cuando el proceso acaba ¿Cuál es la razón de esto? Después de todo un proceso siempre puede destruir sus archivos, si así lo decide.**
 
