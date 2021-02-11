@@ -148,7 +148,7 @@ Se producen 8 faltas de página.
 
 17. **¿Cuál es la ventaja del algoritmo de faltas de página sobre el algoritmo basado en el modelo del conjunto de trabajo utilizando el tamaño de ventana w? ¿Cuál es la desventaja?**
 
-FFP elimina aquellas páginas que no se referenciasen en el intervalo entre la actual falta de página, luego mientras no se produzcan faltas de página FFP no elimnará ningna página al contrario que WS. Sin embargo si se producen 2 faltas de página en un intervalo de tiempo pequeño FFP eliminará una gran cantidad de páginas.
+FFP elimina aquellas páginas que no se referenciasen en el intervalo entre la actual falta de página, luego mientras no se produzcan faltas de página FFP no eliminará ningna página al contrario que WS. Sin embargo si se producen 2 faltas de página en un intervalo de tiempo pequeño FFP eliminará una gran cantidad de páginas.
 
 18. **Supongamos que tenemos un proceso ejecutándose en un sistema paginado, con gestión de memoria basada en el algoritmo de sustitución frecuencia de faltas de página. El proceso tiene 5 páginas ( 0, 1, 2, 3, 4 ). Represente el contenido de la memoria real para ese proceso (es decir, indique que páginas tiene cargadas en cada momento) y cuándo se produce una falta de página. Suponga que, inicialmente, está cargada la página 2, el resto de páginas están en memoria secundaria y que no hay restricciones en cuanto al número de marcos de página disponibles. La cadena de referencias a página es: 0 3 1 1 1 3 4 4 2 2 4 0 0 0 0 3 y el parámetro es τ=3.**
 
